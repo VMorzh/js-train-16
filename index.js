@@ -248,25 +248,21 @@ validateUserInput({ username: "user", password: "pass" });
 // Завдання 9
 /**
  * Функція `calculateTotalPrice` обчислює загальну вартість товарів та логує час виконання.
- *
  * products - Масив об'єктів товарів з властивостями `price` та `title`.
  */
 function calculateTotalPrice(products) {
-  const counterLabel = "Timer";
   // Початок вимірювання часу
-  console.time(counterLabel);
+  console.time("calculateTotalPrice");
   // Створення змінної total яка буде нашою загальную ціною, початкове значення нуль
   let total = 0;
   // Перебираємо кожен об'єкт товару та додаємо ціну товару до загальної вартості
-  for (const product of products) {
+  for (let product of products) {
     total += product.price;
-    // Виведення загальної вартості товарів у форматі "Загальна вартість товарів:", total
-    console.log("Загальна вартість товарів:", total);
-
-    console.timeLog(counterLabel);
-    // Зупинка вимірювання та виведення часу
-    console.timeEnd(counterLabel);
   }
+  // Виведення загальної вартості товарів у форматі "Загальна вартість товарів:", total
+  console.log("Загальна вартість товарів:", total);
+  // Зупинка вимірювання та виведення часу
+  console.timeEnd("calculateTotalPrice");
 }
 console.log("Завдання: 9 ==============================");
 const products = [
@@ -274,7 +270,6 @@ const products = [
   { title: "Ноутбук", price: 2000 },
   { title: "Планшет", price: 500 },
 ];
-
 calculateTotalPrice(products);
 // Виведе
 // Загальна вартість товарів: 3500
@@ -283,15 +278,25 @@ calculateTotalPrice(products);
 // Завдання 10
 /**
  * Функція `countVowelsAndConsonants` пораховує кількість голосних і приголосних літер у слові.
- *
  *  word - слово, для якого потрібно порахувати кількість літер.
  */
 function countVowelsAndConsonants(word) {
-  // Створюємо рядок де будуть всі голосні "aeiou"
+  //Створюємо рядок де будуть всі голосні "aeiou"
+  let vowels = "aeiou";
   // Перебираємо кожну літеру у слові за допомогою for of
-  // Перетворюємо літеру на малу літеру для порівняння
-  // Перевіряємо, чи є літера в нашому рядку з голосними,якщо так виводимио лічильник голосних, інакше приголосних
+  for (let letter of word) {
+    // Перетворюємо літеру на малу літеру для порівняння
+    letter = letter.toLowerCase();
+    // Перевіряємо, чи є літера в нашому рядку з голосними,якщо так виводимио лічильник голосних, інакше приголосних
+    if (vowels.includes(letter)) {
+      console.count("Голосна");
+    } else {
+      console.count("Приголосна");
+    }
+  }
   // Скидаємо лічильники
+  console.countReset("Голосна");
+  console.countReset("Приголосна");
 }
 console.log("Завдання: 10 ==============================");
 countVowelsAndConsonants("HelloWorld!");
